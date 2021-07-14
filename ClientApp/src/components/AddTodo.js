@@ -2,7 +2,8 @@
 
 export default class AddTodo extends Component {
     state = {
-        title: ''
+        title: '',
+        date: ''
     }
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
     onSubmit = (e) => {
@@ -10,6 +11,7 @@ export default class AddTodo extends Component {
             e.preventDefault();
             this.props.addTodo(this.state.title);
             this.setState({ title: '' })
+            createdOn: new Date().toUTCString()
         }
         else {
             alert("Desciption is empty")

@@ -32,7 +32,7 @@ export class FetchData extends Component {
 
 
     }
-    addTodo = async (title) => {
+    addTodo = async (title, date) => {
 
         await fetch('todolist/add',
             {
@@ -41,7 +41,7 @@ export class FetchData extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(title)
+                body: JSON.stringify(title, date)
             }).then(response => response.json()).then(res => {
                 this.setState({ todos: [...this.state.todos, res] })
             }
@@ -87,6 +87,7 @@ export class FetchData extends Component {
             <div
                 className='todo-row'
                 key={Todo.id}
+                date={Todo.Date}
             >
                 <input checked={Todo.state} type="checkbox" onChange={() => self.markComplete(Todo)} />
                     <div style={self.getStyle(Todo)}>{Todo.description}</div>
@@ -95,7 +96,7 @@ export class FetchData extends Component {
                             <RiCloseCircleLine
                                 onClick={() => self.delTodo(Todo.id)} className='delete-icon'
                         />
-                        </div>
+                    </div>
                     </div>
                 </div>
         ));
